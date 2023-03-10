@@ -1,0 +1,40 @@
+/* -------------------------------------------------------------------------- */
+/*                                Breadcrumb styles                */
+/* -------------------------------------------------------------------------- */
+
+@import '../../../global/styles/themes/colors';
+@import './bq-breadcrumb.variables';
+
+.bq-breadcrumb {
+  @apply w-full;
+
+  ::slotted(*) {
+    @apply flex items-center;
+    cursor: pointer;
+  }
+
+  ::slotted(*:not(:nth-last-child(-n + 1)))::after {
+    content: '\00a0/\00a0';
+    padding: 0px 6px;
+  }
+
+  ::slotted(*:last-child) {
+    @apply pointer-events-none flex flex-row text-[color:var(--bq-breadcrumb--color)];
+  }
+
+  &--extended {
+    @apply flex flex-row items-center text-text-secondary;
+  }
+
+  &--collapsable {
+    @apply flex flex-row items-center text-text-secondary;
+
+    ::slotted(*:not(:nth-child(-n + 2), :nth-last-child(-n + 2))) {
+      @apply hidden;
+    }
+
+    ::slotted(*:nth-child(2))::after {
+      content: '\00a0/\00a0...\00a0/\00a0';
+    }
+  }
+}

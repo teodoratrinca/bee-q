@@ -72,6 +72,27 @@ export namespace Components {
         "textColor"?: string;
     }
     /**
+     * A breadcrumb or breadcrumb trail is a graphical control element used as a navigational aid
+     * in user interfaces and on web pages. It allows users to keep track and maintain awareness
+     * of their locations within programs, documents, or websites.
+     */
+    interface BqBreadcrumb {
+    }
+    interface BqBreadcrumbItem {
+        /**
+          * Contains an arrow If prop is set to true, it displays the options
+         */
+        "dropdown": boolean;
+        /**
+          * Contains a URL If prop is set, an anchor tag will be rendered
+         */
+        "link": string;
+        /**
+          * Sets focus on the native `<li>` HTML element used under the hood. Use this method instead of the global `element.focus()`.
+         */
+        "vFocus": () => Promise<void>;
+    }
+    /**
      * Buttons are designed for users to take action on a page or a screen.
      */
     interface BqButton {
@@ -436,6 +457,10 @@ export namespace Components {
         "visible"?: boolean;
     }
 }
+export interface BqBreadcrumbItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLBqBreadcrumbItemElement;
+}
 export interface BqButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLBqButtonElement;
@@ -479,6 +504,23 @@ declare global {
     var HTMLBqBadgeElement: {
         prototype: HTMLBqBadgeElement;
         new (): HTMLBqBadgeElement;
+    };
+    /**
+     * A breadcrumb or breadcrumb trail is a graphical control element used as a navigational aid
+     * in user interfaces and on web pages. It allows users to keep track and maintain awareness
+     * of their locations within programs, documents, or websites.
+     */
+    interface HTMLBqBreadcrumbElement extends Components.BqBreadcrumb, HTMLStencilElement {
+    }
+    var HTMLBqBreadcrumbElement: {
+        prototype: HTMLBqBreadcrumbElement;
+        new (): HTMLBqBreadcrumbElement;
+    };
+    interface HTMLBqBreadcrumbItemElement extends Components.BqBreadcrumbItem, HTMLStencilElement {
+    }
+    var HTMLBqBreadcrumbItemElement: {
+        prototype: HTMLBqBreadcrumbItemElement;
+        new (): HTMLBqBreadcrumbItemElement;
     };
     /**
      * Buttons are designed for users to take action on a page or a screen.
@@ -562,6 +604,8 @@ declare global {
     interface HTMLElementTagNameMap {
         "bq-avatar": HTMLBqAvatarElement;
         "bq-badge": HTMLBqBadgeElement;
+        "bq-breadcrumb": HTMLBqBreadcrumbElement;
+        "bq-breadcrumb-item": HTMLBqBreadcrumbItemElement;
         "bq-button": HTMLBqButtonElement;
         "bq-checkbox": HTMLBqCheckboxElement;
         "bq-divider": HTMLBqDividerElement;
@@ -618,6 +662,27 @@ declare namespace LocalJSX {
           * Badge number color. The value should be a valid value of the palette color
          */
         "textColor"?: string;
+    }
+    /**
+     * A breadcrumb or breadcrumb trail is a graphical control element used as a navigational aid
+     * in user interfaces and on web pages. It allows users to keep track and maintain awareness
+     * of their locations within programs, documents, or websites.
+     */
+    interface BqBreadcrumb {
+    }
+    interface BqBreadcrumbItem {
+        /**
+          * Contains an arrow If prop is set to true, it displays the options
+         */
+        "dropdown"?: boolean;
+        /**
+          * Contains a URL If prop is set, an anchor tag will be rendered
+         */
+        "link"?: string;
+        /**
+          * Handler to be called when the breadcrumb item gets focus
+         */
+        "onBqFocus"?: (event: BqBreadcrumbItemCustomEvent<HTMLBqBreadcrumbItemElement>) => void;
     }
     /**
      * Buttons are designed for users to take action on a page or a screen.
@@ -1014,6 +1079,8 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "bq-avatar": BqAvatar;
         "bq-badge": BqBadge;
+        "bq-breadcrumb": BqBreadcrumb;
+        "bq-breadcrumb-item": BqBreadcrumbItem;
         "bq-button": BqButton;
         "bq-checkbox": BqCheckbox;
         "bq-divider": BqDivider;
@@ -1036,6 +1103,13 @@ declare module "@stencil/core" {
              */
             "bq-avatar": LocalJSX.BqAvatar & JSXBase.HTMLAttributes<HTMLBqAvatarElement>;
             "bq-badge": LocalJSX.BqBadge & JSXBase.HTMLAttributes<HTMLBqBadgeElement>;
+            /**
+             * A breadcrumb or breadcrumb trail is a graphical control element used as a navigational aid
+             * in user interfaces and on web pages. It allows users to keep track and maintain awareness
+             * of their locations within programs, documents, or websites.
+             */
+            "bq-breadcrumb": LocalJSX.BqBreadcrumb & JSXBase.HTMLAttributes<HTMLBqBreadcrumbElement>;
+            "bq-breadcrumb-item": LocalJSX.BqBreadcrumbItem & JSXBase.HTMLAttributes<HTMLBqBreadcrumbItemElement>;
             /**
              * Buttons are designed for users to take action on a page or a screen.
              */
